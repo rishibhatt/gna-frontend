@@ -9,6 +9,7 @@ function PropertyList() {
     const [items,setItems] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(4);
+    const [isLoading,setIsLoading] = useState(true);
     
     
     let API = "https://tripweb.onrender.com/properties";
@@ -16,8 +17,10 @@ function PropertyList() {
         try{
             const res = await fetch(url);
             const data  = await res.json();
+            setIsLoading(false);
             setItems(data);
             console.log(data);
+            
         }
         catch(error)
         {
@@ -31,6 +34,7 @@ function PropertyList() {
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentPosts = items.slice(firstPostIndex,lastPostIndex); 
+   
     return (
        
         <div className='property-list-container p-5  w-2/3 '>
@@ -40,7 +44,12 @@ function PropertyList() {
                     <button className='sort-btn w-28 rounded-full p-3 relative ml-2'><BsArrowDownUp className='absolute ml-3 mt-1' /><span className='ml-3'>Sort</span> </button>
                 </div>
             </div>
-            {items && currentPosts.map((items) => <div className='property-item p-5 border-t-2  flex gap-5'>
+
+            
+               
+            { !isLoading ?
+            
+            items && currentPosts.map((items) => <div className='property-item p-5 border-t-2  flex gap-5'>
                 <div className='property-image h-72 w-64  relative'>
                     <div className='h-8 w-8 rounded-full absolute bg-white top-5 right-3   items-center'><button className='p-2' ><AiOutlineHeart className='text-sm text-gray-400 '/></button></div>
                     <img src={items.image} className='h-64 w-64 rounded' />
@@ -81,7 +90,7 @@ function PropertyList() {
                 </div>
 
             </div>
-            )}
+            ) : <h1 className='text-4xl text-center p-5'>Loading Data...</h1> }
             <Pagination totalPosts={items.length} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
                     </div>
     )
