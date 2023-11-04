@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/gna-frontend/static/css/main.31ce9004.css",
+    "main.js": "/gna-frontend/static/js/main.51622a47.js",
+    "index.html": "/gna-frontend/index.html",
+    "main.31ce9004.css.map": "/gna-frontend/static/css/main.31ce9004.css.map",
+    "main.51622a47.js.map": "/gna-frontend/static/js/main.51622a47.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31ce9004.css",
+    "static/js/main.51622a47.js"
+  ]
+}
